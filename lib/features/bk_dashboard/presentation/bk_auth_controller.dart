@@ -30,6 +30,11 @@ class BkUser {
   });
 
   factory BkUser.fromJson(Map<String, dynamic> json) {
+    final rawPrimary = json['isPrimaryPic'];
+    final bool parsedIsPrimary = rawPrimary is bool
+        ? rawPrimary
+        : (rawPrimary == 1 || rawPrimary == '1' || rawPrimary == 'true' || rawPrimary == null);
+
     return BkUser(
       id: json['id'] as String,
       schoolId: json['schoolId'] as String,
@@ -37,7 +42,7 @@ class BkUser {
       username: json['username'] as String,
       fullName: json['fullName'] as String,
       phoneWa: json['phoneWa'] as String,
-      isPrimaryPic: json['isPrimaryPic'] as bool? ?? true,
+      isPrimaryPic: parsedIsPrimary,
       schoolName: json['schoolName'] as String?,
       schoolNpsn: json['schoolNpsn'] as String?,
       photoUrl: json['photoUrl'] as String?,
