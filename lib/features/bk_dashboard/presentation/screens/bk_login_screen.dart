@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/network/bk_dio_client.dart';
 import '../../../../core/theme/bk_academic_theme.dart';
 import '../bk_auth_controller.dart';
+import 'guru_bk_home_screen.dart';
 
 final publicSchoolsProvider =
     FutureProvider<List<Map<String, dynamic>>>((ref) async {
@@ -289,6 +290,7 @@ class _BkLoginScreenState extends ConsumerState<BkLoginScreen> {
                                 ? null
                                 : () {
                                     if (_formKey.currentState!.validate()) {
+                                      ref.read(bkNavIndexProvider.notifier).state = 0;
                                       ref
                                           .read(bkAuthStateProvider.notifier)
                                           .login(

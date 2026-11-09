@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/bk_academic_theme.dart';
 import '../bk_auth_controller.dart';
+import 'guru_bk_home_screen.dart';
 
 class BkProfileScreen extends ConsumerStatefulWidget {
   final BkUser user;
@@ -573,6 +574,7 @@ class _BkProfileScreenState extends ConsumerState<BkProfileScreen> {
                     ),
                   ),
                   onPressed: () {
+                    ref.read(bkNavIndexProvider.notifier).state = 0;
                     ref.read(bkAuthStateProvider.notifier).logout();
                   },
                 ),

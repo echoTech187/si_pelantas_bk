@@ -62,6 +62,12 @@ class _GuruBkHomeScreenState extends ConsumerState<GuruBkHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<BkAuthState>(bkAuthStateProvider, (previous, next) {
+      if (previous?.isAuthenticated != next.isAuthenticated && next.isAuthenticated) {
+        ref.read(bkNavIndexProvider.notifier).state = 0;
+      }
+    });
+
     final authState = ref.watch(bkAuthStateProvider);
     final currentIndex = ref.watch(bkNavIndexProvider);
     final dashboardAsync = ref.watch(bkDashboardDataProvider);
