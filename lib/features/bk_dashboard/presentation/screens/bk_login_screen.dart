@@ -576,7 +576,9 @@ class _BkLoginScreenState extends ConsumerState<BkLoginScreen> {
               spacing: 6,
               runSpacing: 6,
               children: [
-                _buildPresetChip(ctrl, 'Wi-Fi Laptop',
+                _buildPresetChip(ctrl, '☁️ Vercel Cloud (Prod)',
+                    'https://si-pelantas-open-api.vercel.app/api/v1/school-bk'),
+                _buildPresetChip(ctrl, 'Wi-Fi Laptop (Dev)',
                     'http://192.168.1.52:4000/api/v1/school-bk'),
                 _buildPresetChip(ctrl, 'USB (Reverse)',
                     'http://localhost:4000/api/v1/school-bk'),

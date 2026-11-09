@@ -1,10 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const String _envBaseUrl = String.fromEnvironment('API_BASE_URL');
-const String kDefaultSchoolBkApiBaseUrl =
+const String _nodeEnv = String.fromEnvironment('NODE_ENV', defaultValue: '');
+
+const String kProdSchoolBkApiBaseUrl =
+    'https://si-pelantas-open-api.vercel.app/api/v1/school-bk';
+const String kDevSchoolBkApiBaseUrl =
     'http://192.168.1.52:4000/api/v1/school-bk';
+
+/// Cek apakah mode Production: via NODE_ENV='prod'/'production' atau release build (kReleaseMode)
+final bool kIsProduction = _nodeEnv.toLowerCase() == 'prod' ||
+    _nodeEnv.toLowerCase() == 'production' ||
+    kReleaseMode;
+
+final String kDefaultSchoolBkApiBaseUrl = _envBaseUrl.isNotEmpty
+    ? _envBaseUrl
+    : (kIsProduction ? kProdSchoolBkApiBaseUrl : kDevSchoolBkApiBaseUrl);
 
 final bkSecureStorageProvider = Provider<FlutterSecureStorage>((ref) {
   return const FlutterSecureStorage();
